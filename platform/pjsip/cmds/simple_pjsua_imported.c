@@ -40,11 +40,13 @@
 
 #include <pjsua-lib/pjsua.h>
 
+#include <framework/mod/options.h>
+
 #define THIS_FILE	"APP"
 
-#define SIP_DOMAIN	"example.com"
-#define SIP_USER	"alice"
-#define SIP_PASSWD	"secret"
+#define SIP_DOMAIN	OPTION_STRING_GET(sip_domain)
+#define SIP_USER	OPTION_STRING_GET(sip_user)
+#define SIP_PASSWD	OPTION_STRING_GET(sip_passwd)
 
 
 /* Callback called by the library upon receiving incoming call */
@@ -160,7 +162,7 @@ int main(int argc, char *argv[])
 	cfg.id = pj_str("sip:" SIP_USER "@" SIP_DOMAIN);
 	cfg.reg_uri = pj_str("sip:" SIP_DOMAIN);
 	cfg.cred_count = 1;
-	cfg.cred_info[0].realm = pj_str(SIP_DOMAIN);
+	cfg.cred_info[0].realm = pj_str("*");
 	cfg.cred_info[0].scheme = pj_str("digest");
 	cfg.cred_info[0].username = pj_str(SIP_USER);
 	cfg.cred_info[0].data_type = PJSIP_CRED_DATA_PLAIN_PASSWD;

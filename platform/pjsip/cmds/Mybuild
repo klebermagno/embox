@@ -5,6 +5,10 @@ package platform.pjsip.cmd
 @BuildDepends(third_party.pjproject.libpj_all)
 @Build(stage=2)
 module simple_pjsua_imported {
+	option string sip_domain = "10.0.2.10"
+	option string sip_user = "embox"
+	option string sip_passwd = "123"
+
 	@DefineMacro("PJ_AUTOCONF=1")
 	source "simple_pjsua_imported.c"
 
