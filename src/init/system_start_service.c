@@ -33,7 +33,6 @@ static const char *script_commands[] = {
 	} while (0);
 #endif
 
-#define PRINTF printf
 int system_start(void) {
 	const char *command;
 	char *argv[10];
