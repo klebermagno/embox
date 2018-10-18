@@ -151,12 +151,17 @@ int main(int argc, char **argv) {
 		goto err_terminate_pa;
 	}
 
+	if (callback == record_callback) {
+		printf("Recording! Speak to the microphone\n");
+	} else if (callback == sin_callback) {
+		printf("Recording sin()! Instead of getting sound from your microphone\n"
+				"sin will be recorded to the output file\n");
+	}
+
 	if (paNoError != (err = Pa_StartStream(stream))) {
 		printf("Portaudio error: could not start stream!\n");
 		goto err_terminate_pa;
 	}
-
-	printf("Recording! Speak to the microphone\n");
 
 	Pa_Sleep(sleep_msec);
 
