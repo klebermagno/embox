@@ -319,6 +319,9 @@ static void intel_ac_dev_start(struct audio_dev *dev) {
 		log_error("Unsupported AC97 device id!");
 		return;
 	}
+	/* Reset all registers */
+	out8(ICH_RESETREGS, NAMB_REG(cr));
+
 	out32((uint32_t)_desc_list_by_dev(dev), NAMB_REG(buf));
 
 	/* Setup buffers, currently just zeroes */
