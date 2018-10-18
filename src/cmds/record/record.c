@@ -73,8 +73,6 @@ static int record_callback(const void *inputBuffer, void *outputBuffer,
 		void *userData) {
 	int i;
 
-	framesPerBuffer = 2 * 32 / 4 * 0xff00; /* XXX */
-
 	for (i = 0; i < framesPerBuffer; i++) {
 		if (cur_ptr > sizeof(in_buf))
 			break;
