@@ -24,15 +24,6 @@ static const char *script_commands[] = {
 	#include <system_start.inc>
 };
 
-#if OPTION_GET(NUMBER,log_level) >= LOG_INFO
-#	define MD(x) do {\
-		x;\
-	} while (0);
-#else
-#	define MD(x) do{\
-	} while (0);
-#endif
-
 int system_start(void) {
 	const char *command;
 	char *argv[10];
@@ -42,7 +33,9 @@ int system_start(void) {
 	setup_tty(OPTION_STRING_GET(tty_dev));
 
 	array_foreach(command, script_commands, ARRAY_SIZE(script_commands)) {
-		MD(printf(">%s\n", command));
+#if OPTION_GET(NUMBER,log_level) >= LOG_INFO
+		printf(">%s\n", command);
+#endif
 		argc = cmdline_tokenize((char *)command, argv);
 		if (0 == strncmp(argv[0], "pthread", 7)) {
 			cmd = cmd_lookup(argv[1]);
