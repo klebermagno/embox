@@ -58,8 +58,8 @@ static int sin_callback(const void *inputBuffer, void *outputBuffer,
 
 	for (i = 0; i < framesPerBuffer; i++) {
 		double x = 2 * 3.14 * (i % _sin_w) / _sin_w;
-		in_buf[cur_ptr] = (uint16_t) ((1. + _sin(x)) * _sin_h) |
-						  (uint16_t) ((1. + _sin(x)) * _sin_h);
+		int tmp = (1. + _sin(x)) * _sin_h;
+		in_buf[cur_ptr] = (tmp << 16) | tmp;
 		cur_ptr++;
 	}
 
